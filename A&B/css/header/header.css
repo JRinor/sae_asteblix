@@ -1,0 +1,89 @@
+/* Custom CSS for header */
+
+/* Set the height of the navbar */
+.navbar {
+    height: 70px;
+}
+
+/* Set the background color of the navbar */
+.navbar.custom-bg {
+    background-color: #173753 !important;
+}
+
+/* Set the color of the nav links */
+.nav-link {
+    color: #F2F2F2; /* Change the color of the icons and text to almost white */
+}
+
+/* Style the modal content */
+.modal-content {
+    background-color: #FFFDD9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the header container within the modal */
+.dlgheadcontainer {
+    display:flex;
+    justify-content: space-between;
+    text-align: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+/* Style the close button within the modal */
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Style the container within the modal */
+.dlgcontainer {
+    padding: 16px;
+    margin-top: 50px;
+}
+
+/* Style the labels within the modal */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Style the input fields within the modal */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Style the button within the modal */
+.btn {
+    display: block;
+    margin: 20px auto;
+    width: 40%;
+    height: 10%;
+    margin-top: 30px;
+}
+
+/* Style the fixed bottom navbar */
+.fixed-bottom.navbar {
+    display: flex;
+    justify-content: space-around;
+    background-color: #173753; /* Change the background color to #173753 */
+}
+
+/* Style the nav links within the fixed bottom navbar */
+.fixed-bottom.navbar .nav-link {
+    flex: 1;
+    text-align: center;
+    color: #F2F2F2; /* Change the color of the icons to almost white */
+}
