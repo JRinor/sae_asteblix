@@ -1,89 +1,94 @@
 /* Custom CSS for header */
 
 /* Set the height of the navbar */
-.navbar {
-    height: 70px;
+.header-navbar {
+    height: 4.375rem;
 }
 
 /* Set the background color of the navbar */
-.navbar.custom-bg {
+.header-navbar.custom-bg {
     background-color: #173753 !important;
 }
 
 /* Set the color of the nav links */
-.nav-link {
-    color: #F2F2F2; /* Change the color of the icons and text to almost white */
+.header-nav-link {
+    font-size: 1rem;
+}
+
+.header-dlgcontainer {
+    padding: 1rem;
+    margin-top: 3.125rem;
 }
 
 /* Style the modal content */
-.modal-content {
+.header-modal-content {
     background-color: #FFFDD9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
 }
 
 /* Style the header container within the modal */
-.dlgheadcontainer {
+.header-dlgheadcontainer {
     display:flex;
     justify-content: space-between;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
     color: black;
 }
 
 /* Style the close button within the modal */
-.close {
+.header-close {
     color: black;
     float: right;
-    font-size: 28px;
+    font-size: 2.8rem;
     font-weight: bold;
     cursor: pointer;
 }
 
-/* Style the container within the modal */
-.dlgcontainer {
-    padding: 16px;
-    margin-top: 50px;
-}
-
 /* Style the labels within the modal */
-label {
+.header-label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 0.8rem;
     font-weight: bold;
 }
 
 /* Style the input fields within the modal */
-input {
+.header-input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
     border: 1px solid #ccc;
-    border-radius: 12px;
+    border-radius: 1.2rem;
     box-sizing: border-box;
     text-align: center;
 }
 
 /* Style the button within the modal */
-.btn {
+.header-btn {
     display: block;
-    margin: 20px auto;
+    margin: 2rem auto;
     width: 40%;
     height: 10%;
-    margin-top: 30px;
+    margin-top: 3rem;
 }
 
 /* Style the fixed bottom navbar */
-.fixed-bottom.navbar {
+.header-fixed-bottom.navbar {
     display: flex;
     justify-content: space-around;
     background-color: #173753; /* Change the background color to #173753 */
 }
 
 /* Style the nav links within the fixed bottom navbar */
-.fixed-bottom.navbar .nav-link {
+.header-fixed-bottom.navbar .nav-link {
     flex: 1;
     text-align: center;
     color: #F2F2F2; /* Change the color of the icons to almost white */
+}
+
+@media (max-width: 768px) {
+    .header-navbar {
+        padding: 1.25rem;
+    }
 }

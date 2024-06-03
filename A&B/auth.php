@@ -1,7 +1,10 @@
 <?php
-require('dbconnect.php');
+require_once('dbconnect.php');
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 $admin = isset($_SESSION["admin"]) ? $_SESSION["admin"] : false;
 $member = isset($_SESSION["login"]);

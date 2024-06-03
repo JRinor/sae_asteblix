@@ -3,7 +3,9 @@ require('auth.php');
 ?>
 
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <html>
+
 
 <head>
     <title>Astéblix</title>
@@ -44,10 +46,10 @@ require('auth.php');
                 <a class="nav-link" href="gdscans.php">Galerie des scans</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle fa-2x"></i>
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="login.php">Se connecter</a>
                     <a class="dropdown-item" href="register.php">S'inscrire</a>
                 </div>
