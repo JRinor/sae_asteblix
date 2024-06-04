@@ -1,13 +1,3 @@
-<?php
-require('header.php');
-require('auth.php');
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // TODO: Add your authentication logic here
-}
-
-?>
-
 <!DOCTYPE html>
 <html>
 
