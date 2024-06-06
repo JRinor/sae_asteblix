@@ -94,6 +94,20 @@
       </div>
     </nav>
 
+    <div id="loginModal" class="modal">
+      <form id="loginForm" class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <div class="dlgheadcontainer">
+          <img src="img/logonoir.png" alt="Logo" class="logoco">
+          <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+        </div>
+        <div class="dlgcontainer">
+          <input type="text" placeholder="IDENTIFIANT" name="login" id="login" required>
+          <input type="password" placeholder="MOT DE PASSE" name="password" id="password" required>
+          <button type="submit" class="okbtn">Se connecter</button>
+        </div>
+      </form>
+    </div>
+
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8 p-4">
