@@ -46,8 +46,12 @@ body {
   background-color: #fffdd9;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: none;
+  box-shadow: 0 0 10px;
+}
+
+.modal-content {
+    border: none;
+    background-color: #fffdd9;
 }
 
 .dlgheadcontainer {
