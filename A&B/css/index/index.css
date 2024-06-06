@@ -1,50 +1,37 @@
-body.index-page {
-  background-color: #fffdd9;
-  font-family: "Rounded Mplus 1c", sans-serif;
+body {
+    background-color: #FFFDD9;
+    font-family: 'Rounded Mplus 1c', sans-serif;
+    margin: 0;
 }
 
-.index-page .container {
-  padding-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
+.index-page {
+    text-align: center;
+    width: 100%;
 }
 
 .index-page h2 {
-  font-style: bold;
-  color: #173753;
-  font-size: 6vh;
-  text-align: center;
-  margin-bottom: 5%;
+    font-weight: bold;
+    color: #173753;
+    font-size: 6vh;
+    margin-bottom: 6vw;
+    margin-top: 10vw;
 }
 
 .index-page p {
-  color: #173753;
-  font-size: 3vh;
-  text-align: center;
-  margin-bottom: 20px;
+    color: #173753;
+    font-size: 3vh;
+    margin-bottom: 20px;
+    padding-left: 25vh;
+    padding-right: 25vh;
 }
 
-.index-page .content-image {
-  display: block;
-  margin-bottom: 20%;
-  margin-top: 10%;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
-
-.col-md-8 {
-  margin-top: 10%;
-}
-
-.navbar-logo {
-  width: auto;
-  height: auto; /* Ou une taille spécifique si nécessaire */
-}
-
-.index-page .content-image {
-  width: 50%;
-  height: auto;
+.index-page img {
+    display: block;
+    width: 25%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 8%;
+    margin-bottom: 8%;
 }
 
 #loginModal {
@@ -62,7 +49,7 @@ body.index-page {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: none;
   }
-  
+
   .dlgheadcontainer {
     display: flex;
     justify-content: space-between;
@@ -70,25 +57,25 @@ body.index-page {
     margin-bottom: 20px;
     color: black;
   }
-  
+
   .close {
     color: black;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
   }
-  
+
   .dlgcontainer {
     padding: 16px;
     margin-top: 20px;
   }
-  
+
   label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
   }
-  
+
   input {
     width: 100%;
     padding: 10px;
@@ -98,7 +85,7 @@ body.index-page {
     box-sizing: border-box;
     text-align: center;
   }
-  
+
   .okbtn {
     background-color: #173753;
     color: white;
@@ -110,9 +97,8 @@ body.index-page {
     margin: 20px auto;
     width: 40%;
   }
-  
+
   .okbtn:hover,
   .cancelbtn:hover {
     opacity: 0.8;
   }
-  
