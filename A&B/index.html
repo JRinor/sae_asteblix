@@ -22,6 +22,7 @@
     />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/header.css" />
+    
   </head>
   <body>
     <nav
@@ -53,24 +54,14 @@
           <li class="nav-item">
             <a class="nav-link" href="gdscans.php">Galerie des scans</a>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item">
             <a
               class="nav-link"
               href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
+              onclick="document.getElementById('loginModal').style.display='block'"
             >
               <i class="fas fa-user-circle fa-2x"></i>
             </a>
-            <div
-              class="dropdown-menu dropdown-menu-right"
-              aria-labelledby="navbarDropdown"
-            >
-              <a class="dropdown-item">Se connecter</a>
-            </div>
           </li>
         </ul>
       </div>
@@ -84,7 +75,10 @@
         <a class="navbar-brand" href="#"
           ><img src="img/logo.png" height="80" class="navbar-logo"
         /></a>
-        <a class="nav-link" href="#" onclick="authenticate();"
+        <a
+          class="nav-link"
+          href="#"
+          onclick="document.getElementById('loginModal').style.display='block'"
           ><i class="fas fa-user-circle fa-2x"></i
         ></a>
       </div>
@@ -103,6 +97,20 @@
         ></a>
       </div>
     </nav>
+
+    <div id="loginModal" class="modal">
+        <form id="loginForm" class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+          <div class="dlgheadcontainer">
+            <img src="img/logonoir.png" alt="Logo" class="logoco">
+            <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
+          </div>
+          <div class="dlgcontainer">
+            <input type="text" placeholder="IDENTIFIANT" name="login" id="login" required>
+            <input type="password" placeholder="MOT DE PASSE" name="password" id="password" required>
+            <button type="submit" class="okbtn">Se connecter</button>
+          </div>
+        </form>
+      </div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
