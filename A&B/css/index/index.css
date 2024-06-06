@@ -5,6 +5,8 @@ body.index-page {
 
 .index-page .container {
     padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .index-page h2 {
@@ -22,7 +24,7 @@ body.index-page {
     margin-bottom: 20px;
 }
 
-.index-page img {
+.index-page .content-image {
     display: block;
     margin-bottom: 20%;
     margin-top: 10%;
@@ -31,6 +33,16 @@ body.index-page {
     width: 50%;
 }
 
-.col-md-8{
+.col-md-8 {
     margin-top: 10%;
+}
+
+.navbar-logo {
+    width: auto;
+    height: auto; /* Ou une taille spécifique si nécessaire */
+}
+
+.index-page .content-image {
+    width: 50%;
+    height: auto;
 }
