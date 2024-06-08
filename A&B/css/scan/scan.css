@@ -28,7 +28,7 @@ body {
 }
 
 #depose-photo {
-  margin-bottom: 8vw;
+  margin-bottom: 3vw;
 }
 
 #prendre-photo p {
@@ -108,4 +108,17 @@ input {
 .okbtn:hover,
 .cancelbtn:hover {
   opacity: 0.8;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.btn-primary {
+  margin-bottom: 8vw;
 }
