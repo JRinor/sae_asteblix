@@ -194,7 +194,7 @@
             request.then((response) => response.json())
             .then((json) => {
               console.log(json);
-
+              document.location.href = `result.html?guess=${json['guess']}&guessid=${json["id"]}`;
             });
           };
 

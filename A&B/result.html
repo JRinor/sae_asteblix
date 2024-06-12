@@ -113,33 +113,21 @@
         <div class="col-md-8 p-4">
           <div class="row-md-6">
             <h2>Résultat de requête</h2>
-            <p>
+            <p id="result-guess">
               {resultat ici}
             </p>
-          </div>
-          <div class="row p-2 justify-content-around">
-            <div id="depose-photo" class="col-4 justify-content-center">
-              <div class="row justify-content-center">
-                <p>Déposer une photo</p>
-              </div>
-              <div class="row justify-content-center p-3">
-                <img src="img/deposer_image.png" alt="Image" onclick="triggerFileInput()" />
-                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png" style="display: none;" onchange="displayImage(event)" />
-              </div>
-            </div>
-            <div id="prendre-photo" class="col-4 justify-content-center">
-              <div class="row justify-content-center">
-                <p>Prendre une photo</p>
-              </div>
-              <div class="row justify-content-center p-3">
-                <img src="img/prendre_photo.png" alt="Image" onclick="openCamera()" />
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
     <script>
+        const resultGuessHolder = document.getElementById("result-guess");
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        const guess = urlParams.get('guess');
+        const guessimage = urlParams.get('guessimage');
+        resultGuessHolder.innerText = guess;
     </script>
   </body>
 </html>
