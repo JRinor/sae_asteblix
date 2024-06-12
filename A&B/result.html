@@ -112,10 +112,9 @@
       <div class="row justify-content-center">
         <div class="col-md-8 p-4">
           <div class="row-md-6">
-            <h2>Vous souhaitez défier l'IA?</h2>
+            <h2>Résultat de requête</h2>
             <p>
-              Pour cela, rien de plus simple, choisissez entre les options
-              suivantes :
+              {resultat ici}
             </p>
           </div>
           <div class="row p-2 justify-content-around">
@@ -140,116 +139,7 @@
         </div>
       </div>
     </div>
-
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div id="imagePreview" class="col-6 text-center"></div>
-      </div>
-    </div>
-
-    <div id="cameraModal" class="modal">
-      <div class="modal-content animate">
-        <div class="dlgheadcontainer">
-          <span onclick="closeCamera()" class="close" title="Close Modal">&times;</span>
-        </div>
-        <div class="dlgcontainer text-center">
-          <video id="camera" autoplay style="width: 100%; max-height: 400px;"></video>
-          <button id="captureButton" class="btn btn-primary mt-3">Prendre la photo</button>
-        </div>
-      </div>
-    </div>
-
     <script>
-      function triggerFileInput() {
-        document.getElementById('fileInput').click();
-      }
-
-      function displayImage(event) {
-        const imagePreview = document.getElementById('imagePreview');
-        imagePreview.innerHTML = '';
-
-        const file = event.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = function(e) {
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.classList.add('img-fluid', 'mt-3');
-          img.style.maxHeight = '400px';
-
-          const button = document.createElement('button');
-          button.textContent = 'Lancer le scan';
-          button.classList.add('btn', 'btn-primary', 'mt-3');
-          button.onclick = function() {
-            // Fonction du scan ici (en lien avec l'API)
-            const apiUrl = 'https://api.example.com/data';
-            
-          };
-
-          imagePreview.appendChild(img);
-          imagePreview.appendChild(button);
-          button.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-        };
-
-        reader.readAsDataURL(file);
-        
-      }
-
-      function openCamera() {
-        const cameraModal = document.getElementById('cameraModal');
-        cameraModal.style.display = 'block';
-
-        const video = document.getElementById('camera');
-        navigator.mediaDevices.getUserMedia({ video: true })
-          .then((stream) => {
-            video.srcObject = stream;
-          })
-          .catch((err) => {
-            console.error('Erreur d\'accès à la caméra:', err);
-          });
-
-        const captureButton = document.getElementById('captureButton');
-        captureButton.onclick = function() {
-          const canvas = document.createElement('canvas');
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-          const context = canvas.getContext('2d');
-          context.drawImage(video, 0, 0, canvas.width, canvas.height);
-          const imageURL = canvas.toDataURL('image/png');
-
-          const imagePreview = document.getElementById('imagePreview');
-          imagePreview.innerHTML = '';
-
-          const img = document.createElement('img');
-          img.src = imageURL;
-          img.classList.add('img-fluid', 'mt-3');
-          img.style.maxHeight = '400px';
-
-          const button = document.createElement('button');
-          button.textContent = 'Lancer le scan';
-          button.classList.add('btn', 'btn-primary', 'mt-3');
-          button.onclick = function() {
-            // Fonction du scan ici (en lien avec l'API)
-
-          };
-
-          imagePreview.appendChild(img);
-          imagePreview.appendChild(button);
-
-          closeCamera();
-        };
-      }
-
-      function closeCamera() {
-        const cameraModal = document.getElementById('cameraModal');
-        cameraModal.style.display = 'none';
-
-        const video = document.getElementById('camera');
-        const stream = video.srcObject;
-        const tracks = stream.getTracks();
-        tracks.forEach(track => track.stop());
-        video.srcObject = null;
-      }
     </script>
   </body>
 </html>
