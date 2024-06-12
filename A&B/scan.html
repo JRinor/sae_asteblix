@@ -182,8 +182,20 @@
           button.classList.add('btn', 'btn-primary', 'mt-3');
           button.onclick = function() {
             // Fonction du scan ici (en lien avec l'API)
-            const apiUrl = 'https://api.example.com/data';
-            
+
+            var form = new FormData();
+            form.append("guessimage", file);
+            console.log(form);
+            var request = fetch("http://localhost:8080/api/guesses", {
+              method: "POST",
+              body: form,
+            });
+
+            request.then((response) => response.json())
+            .then((json) => {
+              console.log(json);
+
+            });
           };
 
           imagePreview.appendChild(img);
