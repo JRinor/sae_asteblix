@@ -132,34 +132,14 @@
           button.textContent = 'Lancer le scan';
           button.classList.add('btn', 'btn-primary', 'mt-3');
           button.onclick = function() {
-<<<<<<< HEAD
             scanImage(file);  // Call scanImage with the file
-=======
-            // Fonction du scan ici (en lien avec l'API)
-
-            var form = new FormData();
-            form.append("guessimage", file);
-            console.log(form);
-            var request = fetch("http://localhost:8080/api/guesses", {
-              method: "POST",
-              body: form,
-            });
-
-            request.then((response) => response.json())
-            .then((json) => {
-              console.log(json);
-              document.location.href = `result.html?guess=${json['guess']}&guessid=${json["id"]}`;
-            });
->>>>>>> ed480f0a05578b7e897d79312f8de3c15427663c
           };
 
           imagePreview.appendChild(img);
           imagePreview.appendChild(button);
-          button.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
         };
 
         reader.readAsDataURL(file);
-        
       }
 
       function openCamera() {
@@ -196,15 +176,10 @@
           button.textContent = 'Lancer le scan';
           button.classList.add('btn', 'btn-primary', 'mt-3');
           button.onclick = function() {
-<<<<<<< HEAD
             // Convert the dataURL to a Blob
             fetch(imageURL)
               .then(res => res.blob())
               .then(blob => scanImage(blob));
-=======
-            // Fonction du scan ici (en lien avec l'API)
-
->>>>>>> ed480f0a05578b7e897d79312f8de3c15427663c
           };
 
           imagePreview.appendChild(img);
