@@ -15,22 +15,11 @@
     <link rel="stylesheet" href="css/index/index.css" />
 </head>
 <body>
-    <nav
-      class="navbar navbar-expand-lg navbar-dark d-none d-lg-flex align-items-center"
-      style="background-color: #173753"
-    >
-      <a class="navbar-brand" href="#"
-        ><img src="img/logo.png" height="60" class="navbar-logo"
-      /></a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+    <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-flex align-items-center" style="background-color: #173753">
+      <a class="navbar-brand" href="#">
+        <img src="img/logo.png" height="60" class="navbar-logo" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -45,11 +34,7 @@
             <a class="nav-link" href="gdscans.html">Galerie des scans</a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link"
-              href="#"
-              onclick="document.getElementById('loginModal').style.display='block'"
-            >
+            <a class="nav-link" href="#" onclick="document.getElementById('loginModal').style.display='block'">
               <i class="fas fa-user-circle fa-2x"></i>
             </a>
           </li>
@@ -62,7 +47,7 @@
             <a class="navbar-brand" href="#">
                 <img src="img/logo.png" class="navbar-logo-small">
             </a>
-            <a class="nav-link" href="#" onclick="authenticate();">
+            <a class="nav-link" href="#" onclick="document.getElementById('loginModal').style.display='block'">
                 <i class="fas fa-user-circle fa-2x"></i>
             </a>
         </div>
@@ -70,13 +55,13 @@
 
     <nav class="navbar fixed-bottom navbar-light bg-light d-block d-lg-none">
         <div class="d-flex justify-content-around w-100">
-            <a class="nav-link" href="index.php">
+            <a class="nav-link" href="index.html">
                 <i class="fas fa-home fa-2x"></i>
             </a>
             <a class="nav-link" href="scan.html">
                 <i class="fas fa-camera fa-2x"></i>
             </a>
-            <a class="nav-link" href="gdscans.php">
+            <a class="nav-link" href="gdscans.html">
                 <i class="fas fa-images fa-2x"></i>
             </a>
         </div>
@@ -95,7 +80,7 @@
     </div>
 
     <div id="loginModal" class="modal">
-        <form id="loginForm" class="modal-content animate" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+        <form id="loginForm" class="modal-content animate">
           <div class="dlgheadcontainer">
             <img src="img/logonoir.png" alt="Logo" class="logoco">
             <span onclick="document.getElementById('loginModal').style.display='none'" class="close" title="Close Modal">&times;</span>
@@ -106,11 +91,59 @@
             <button type="submit" class="okbtn">Se connecter</button>
           </div>
         </form>
-      </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+          event.preventDefault(); // Empêche le comportement par défaut de soumission du formulaire
+
+          const login = document.getElementById('login').value;
+          const password = document.getElementById('password').value;
+
+          console.log('Tentative de connexion...');
+          console.log('Login:', login);
+          console.log('Password:', password);
+
+          try {
+            const response = await fetch('http://localhost:8080/api/login', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                email: login,
+                pass: password,
+              }),
+            });
+
+            console.log('Réponse reçue:', response);
+
+            const data = await response.json();
+            console.log('Données reçues:', data);
+
+            if (response.status === 201) {
+              alert('Connexion réussie !');
+              console.log('Token:', data.token);
+              // Vous pouvez stocker le token dans le localStorage ou les cookies si nécessaire
+              localStorage.setItem('token', data.token);
+              // Fermez la modal
+              document.getElementById('loginModal').style.display = 'none';
+            } else {
+              alert('Erreur de connexion: ' + data.message);
+            }
+          } catch (error) {
+            console.error('Erreur:', error);
+            alert('Erreur de connexion. Veuillez réessayer.');
+          }
+        });
+      });
+    </script>
 </body>
 </html>
