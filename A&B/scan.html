@@ -125,18 +125,19 @@
         reader.onload = function(e) {
           const img = document.createElement('img');
           img.src = e.target.result;
-          img.classList.add('img-fluid', 'mt-3');
+          img.classList.add('img-fluid', 'mt-3', 'row', 'mx-auto');
           img.style.maxHeight = '400px';
 
           const button = document.createElement('button');
           button.textContent = 'Lancer le scan';
-          button.classList.add('btn', 'btn-primary', 'mt-3');
+          button.classList.add('btn', 'btn-primary', 'mt-3', 'row');
           button.onclick = function() {
             scanImage(file);  // Call scanImage with the file
           };
 
           imagePreview.appendChild(img);
           imagePreview.appendChild(button);
+          imagePreview.scrollIntoView({ behavior: "smooth", block: "end"});
         };
 
         reader.readAsDataURL(file);
