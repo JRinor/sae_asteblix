@@ -1,0 +1,60 @@
+body.gdscans {
+    background-color: #FFF9E5;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+body.gdscans h1 {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+body.gdscans #imageGallery {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+body.gdscans .imageContainer {
+    width: 150px; /* Fixed width for each image container */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+body.gdscans .imageContainer img {
+    width: 100%; /* Make images fill their containers */
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+body.gdscans .caption {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f1f1d4;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+body.gdscans .button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #00274D;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+body.gdscans .button:hover {
+    background-color: #00509E;
+}

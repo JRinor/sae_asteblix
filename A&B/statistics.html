@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques</title>
+    <link rel="stylesheet" href="css/statistics/statistics.css">
+</head>
+<body class="statistics">
+<div id="header"></div>
+<div class="content">
+    <h1>Statistiques</h1>
+    <div id="chartContainer">
+        <canvas id="myChart"></canvas>
+    </div>
+    <p>Nombre de scans effectués : <span id="scanCount"></span></p>
+    <div class="legend">
+        <h2>Légende :</h2>
+        <ul id="legendList">
+            <li><span class="legend-color" style="background-color: green;"></span>Vrai: <span id="trueCount"></span></li>
+            <li><span class="legend-color" style="background-color: red;"></span>Faux: <span id="falseCount"></span></li>
+            <li><span class="legend-color" style="background-color: gray;"></span>Invalid: <span id="invalidCount"></span></li>
+        </ul>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Récupérer les données et créer le graphique
+    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUb3V0YXRpeC5pdXRzZCIsImF1ZCI6IlRvdXRhdGl4Lml1dHNkIiwiaWF0IjoxNzE4NTQzNjEzLCJleHAiOjE3MTg2MzAwMTMsImRhdGEiOnsidXNlcm5hbWUiOiJhc3Rlcml4QGlycmVkdWN0aWJsZXMuZnIiLCJhZG1pbiI6MX19.RB5z8A2ee5E7WbWmHxaj1Jg7ZgunotZik33MobmHv7k';
+
+    // Fetch data from the API
+    fetch('http://localhost:8080/api/guesses', {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Initialize counters
+            let trueCount = 0;
+            let falseCount = 0;
+            let invalidCount = 0;
+
+            // Count the number of each type of response
+            data.forEach(guess => {
+                if (guess.win === "1") {
+                    trueCount++;
+                } else if (guess.win === "-1") {
+                    falseCount++;
+                } else if (guess.win === "0") {
+                    invalidCount++;
+                }
+            });
+
+            // Update HTML with counts
+            document.getElementById('trueCount').textContent = trueCount;
+            document.getElementById('falseCount').textContent = falseCount;
+            document.getElementById('invalidCount').textContent = invalidCount;
+
+            // Create the pie chart
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: [trueCount, falseCount, invalidCount],
+                        backgroundColor: ['green', 'red', 'gray']
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Pourcentage de réponses vraies, fausses et invalides'
+                    }
+                }
+            });
+        })
+        .catch(error => console.error('Error:', error));
+
+    // Charger le contenu de l'en-tête
+    fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('header').innerHTML = data;
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+body.statistics {
+    background-color: #FFF9E5;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+body.statistics #header {
+    background-color: #00274D;
+    color: white;
+}
+
+body.statistics .content {
+    padding: 20px;
+}
+
+body.statistics h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+body.statistics #chartContainer {
+    width: 20%;
+    margin: 0 auto;
+}
+
+body.statistics p {
+    font-size: 18px;
+    color: #333;
+}
+
+body.statistics .legend {
+    text-align: left;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+body.statistics .legend h2 {
+    font-size: 18px;
+    color: #333;
+}
+
+body.statistics .legend ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+body.statistics .legend li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+body.statistics .legend-color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
