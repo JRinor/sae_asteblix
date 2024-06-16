@@ -102,7 +102,7 @@
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('loginForm').addEventListener('submit', async function(event) {
-          event.preventDefault(); // Empêche le comportement par défaut de soumission du formulaire
+          event.preventDefault();
 
           const login = document.getElementById('login').value;
           const password = document.getElementById('password').value;
@@ -131,15 +131,14 @@
             if (response.status === 201) {
               alert('Connexion réussie !');
               console.log('Token:', data.token);
-              // Vous pouvez stocker le token dans le localStorage ou les cookies si nécessaire
+              
               localStorage.setItem('token', data.token);
-              // Fermez la modal
+              
               document.getElementById('loginModal').style.display = 'none';
             } else {
               alert('Erreur de connexion: ' + data.message);
             }
           } catch (error) {
-            console.error('Erreur:', error);
             alert('Erreur de connexion. Veuillez réessayer.');
           }
         });
