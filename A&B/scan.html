@@ -239,7 +239,9 @@
           const button = document.createElement("button");
           button.textContent = "Lancer le scan";
           button.classList.add("btn", "btn-primary", "mt-3", "row");
+          
           button.onclick = function () {
+            
             localStorage.setItem("guessimage", img.src);
             scanImage(file); // Call scanImage with the file
           };
@@ -290,7 +292,10 @@
             // Convert the dataURL to a Blob
             fetch(imageURL)
               .then((res) => res.blob())
-              .then((blob) => scanImage(blob));
+              .then((blob) => {
+                localStorage.setItem("guessimage", img.src);
+                scanImage(new File([blob], 'guessimage.png', {type: blob.type}));
+              });
           };
 
           imagePreview.appendChild(img);
