@@ -20,6 +20,13 @@
       href="https://fonts.googleapis.com/css2?family=Rounded+Mplus+1c:wght@400&display=swap"
       rel="stylesheet"
     />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/index/index.css" />
   </head>
@@ -59,7 +66,9 @@
               href="#"
               onclick="document.getElementById('loginModal').style.display='block'"
             >
-              <i class="fas fa-user-circle fa-2x"></i>
+              <div class="loginIcon">
+                <i class="fas fa-user-circle fa-2x"></i>
+              </div>
             </a>
           </li>
         </ul>
@@ -79,12 +88,14 @@
           href="#"
           onclick="document.getElementById('loginModal').style.display='block'"
         >
-          <i class="fas fa-user-circle fa-2x"></i>
+          <div class="loginIcon">
+            <i class="fas fa-user-circle fa-2x"></i>
+          </div>
         </a>
       </div>
     </nav>
 
-    <nav class="navbar fixed-bottom navbar-light bg-light d-block d-lg-none">
+    <nav class="navbar fixed-bottom d-block d-lg-none">
       <div class="d-flex justify-content-around w-100">
         <a class="nav-link" href="index.html">
           <i class="fas fa-home fa-2x"></i>

@@ -50,8 +50,8 @@ body {
 }
 
 .modal-content {
-    border: none;
-    background-color: #fffdd9;
+  border: none;
+  background-color: #fffdd9;
 }
 
 .dlgheadcontainer {
@@ -105,4 +105,17 @@ input {
 .okbtn:hover,
 .cancelbtn:hover {
   opacity: 0.8;
+}
+
+.navbar-nav .nav-link {
+  color: white !important;
+  font-family: "Inter", sans-serif;
+}
+
+.fas {
+  color: #173753;
+}
+
+.loginIcon .fas {
+  color: white;
 }

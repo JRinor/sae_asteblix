@@ -15,6 +15,7 @@ body {
   font-size: 6vh;
   margin-bottom: 7vw;
   margin-top: 10vw;
+  font-weight: bold;
 }
 
 .container p {
@@ -121,5 +122,18 @@ input {
 
 .btn-primary {
   margin-bottom: 8vw;
+}
+
+.navbar-nav .nav-link {
+  color: white !important; 
+  font-family: "Inter", sans-serif;
+}
+
+.fas {
+  color: #173753;
+}
+
+.loginIcon .fas {
+  color: white;
 }
 

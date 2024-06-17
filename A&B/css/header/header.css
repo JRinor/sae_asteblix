@@ -1,104 +1,85 @@
-/* Custom CSS for header */
-
-/* Set the height of the navbar */
-.header-navbar {
-    height: 4.375rem;
+#loginModal {
+  z-index: 1000;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background-color: #fffdd9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px;
 }
 
-/* Set the background color of the navbar */
-.header-navbar.custom-bg {
-    background-color: #173753 !important;
+.modal-content {
+  border: none;
+  background-color: #fffdd9;
 }
 
-/* Set the color of the nav links */
-.header-nav-link {
-    font-size: 1rem;
+.dlgheadcontainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: black;
 }
 
-.header-dlgcontainer {
-    padding: 1rem;
-    margin-top: 3.125rem;
+.close {
+  color: black;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-/* Style the modal content */
-.header-modal-content {
-    background-color: #FFFDD9;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+.dlgcontainer {
+  padding: 16px;
+  margin-top: 20px;
 }
 
-/* Style the header container within the modal */
-.header-dlgheadcontainer {
-    display:flex;
-    justify-content: space-between;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: black;
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
-/* Style the close button within the modal */
-.header-close {
-    color: black;
-    float: right;
-    font-size: 2.8rem;
-    font-weight: bold;
-    cursor: pointer;
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-/* Style the labels within the modal */
-.header-label {
-    display: block;
-    margin-bottom: 0.8rem;
-    font-weight: bold;
+.okbtn {
+  background-color: #173753;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+  width: 40%;
 }
 
-/* Style the input fields within the modal */
-.header-input {
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-    border: 1px solid #ccc;
-    border-radius: 1.2rem;
-    box-sizing: border-box;
-    text-align: center;
+.okbtn:hover,
+.cancelbtn:hover {
+  opacity: 0.8;
 }
 
-/* Style the button within the modal */
-.header-btn {
-    display: block;
-    margin: 2rem auto;
-    width: 40%;
-    height: 10%;
-    margin-top: 3rem;
+.navbar-nav .nav-link {
+  color: white !important;
+  font-family: "Inter", sans-serif;
 }
 
-/* Style the fixed bottom navbar */
-.header-fixed-bottom.navbar {
-    display: flex;
-    justify-content: space-around;
-    background-color: #173753; /* Change the background color to #173753 */
+.fas {
+  color: #173753;
 }
 
-/* Style the nav links within the fixed bottom navbar */
-.header-fixed-bottom.navbar .nav-link {
-    flex: 1;
-    text-align: center;
-    color: #F2F2F2; /* Change the color of the icons to almost white */
-}
-
-@media (max-width: 768px) {
-    .header-navbar {
-        padding: 1.25rem;
-    }
-}
-
-/* Ajoutez de l'espace à droite de chaque élément de navigation */
-.nav-item {
-    margin-right: 20px; /* Ajustez cette valeur selon vos besoins */
-}
-
-/* Ajoutez de l'espace entre le dernier élément de navigation et le bord droit de la barre de navigation */
-.navbar-nav {
-    padding-right: 20px; /* Ajustez cette valeur selon vos besoins */
+.loginIcon .fas {
+  color: white;
 }

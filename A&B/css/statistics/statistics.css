@@ -1,54 +1,57 @@
 body.statistics {
-    background-color: #FFF9E5;
-    font-family: Arial, sans-serif;
+    background-color: #fffdd9;
+}
+
+.content {
+    background-color: #fffdd9;
+}
+
+.title h1 {
+    background-color: #fffdd9;
     text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-body.statistics #header {
-    background-color: #00274D;
-    color: white;
-}
-
-body.statistics .content {
-    padding: 20px;
-}
-
-body.statistics h1 {
-    font-size: 24px;
-    color: #333;
+    font-family: "Rounded Mplus 1c", sans-serif;
+    font-weight: bold;
+    margin-top: 10vw;
+    margin-bottom: 10vw;
 }
 
 body.statistics #chartContainer {
     width: 20%;
+    height: auto;
     margin: 0 auto;
 }
 
 body.statistics p {
+    font-family: "Rounded Mplus 1c", sans-serif;
     font-size: 18px;
-    color: #333;
+    margin-top: 5vw;
+    text-align: center;
 }
 
 body.statistics .legend {
     text-align: left;
     display: inline-block;
     margin-top: 20px;
+    margin-bottom: 10vw;
 }
 
 body.statistics .legend h2 {
-    font-size: 18px;
-    color: #333;
+    font-family: "Rounded Mplus 1c", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10vh;
+    margin-bottom: 1vw;
 }
 
 body.statistics .legend ul {
     list-style-type: none;
     padding: 0;
+    margin-left: 10vh;
 }
 
 body.statistics .legend li {
     font-size: 16px;
-    color: #333;
+    font-family: "Rounded Mplus 1c", sans-serif;
     margin-bottom: 5px;
 }
 
@@ -56,6 +59,6 @@ body.statistics .legend-color {
     display: inline-block;
     width: 20px;
     height: 20px;
-    margin-right: 10px;
+    margin-right: 2vh;
     vertical-align: middle;
 }

@@ -1,52 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Galerie des scans</title>
-    <link rel="stylesheet" href="css/gdscans/gdscans.css">
-</head>
-<body class="gdscans">
-<div id="header"></div>
-<h1>Galerie des anciens scans effectués</h1>
-<div id="imageGallery"></div>
-<a href="statistics.html" class="button">Voir les statistiques</a>
+    <link rel="stylesheet" href="css/gdscans/gdscans.css" />
+  </head>
+  <body class="gdscans">
+    <div id="header"></div>
+    <h1>Galerie des anciens scans effectués</h1>
+    <div id="imageGallery"></div>
 
-<script>
-    const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUb3V0YXRpeC5pdXRzZCIsImF1ZCI6IlRvdXRhdGl4Lml1dHNkIiwiaWF0IjoxNzE4NTQzNjEzLCJleHAiOjE3MTg2MzAwMTMsImRhdGEiOnsidXNlcm5hbWUiOiJhc3Rlcml4QGlycmVkdWN0aWJsZXMuZnIiLCJhZG1pbiI6MX19.RB5z8A2ee5E7WbWmHxaj1Jg7ZgunotZik33MobmHv7k';
+    <div class="boutonStats">
+      <a href="statistics.html">Voir les statistiques</a>
+    </div>
 
-    fetch('http://localhost:8080/api/guesses', {
+    <script>
+      const token =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJUb3V0YXRpeC5pdXRzZCIsImF1ZCI6IlRvdXRhdGl4Lml1dHNkIiwiaWF0IjoxNzE4NjM2MTQ1LCJleHAiOjE3MTg3MjI1NDUsImRhdGEiOnsidXNlcm5hbWUiOiJhc3Rlcml4QGlycmVkdWN0aWJsZXMuZnIiLCJhZG1pbiI6IjEifX0.qRuUgHkGNfcwN5EWPYe-5S84jt2uo8i5KyD8OKERsuU";
+
+      fetch("http://localhost:8080/api/guesses", {
         headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            const imageGallery = document.getElementById('imageGallery');
-            data.forEach(guess => {
-                const imgContainer = document.createElement('div');
-                const img = document.createElement('img');
-                const caption = document.createElement('div');
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const imageGallery = document.getElementById("imageGallery");
+          data.forEach((guess) => {
+            const imgContainer = document.createElement("div");
+            const img = document.createElement("img");
+            const caption = document.createElement("div");
 
-                img.src = `http://localhost:8080${guess.imagepath}`;
-                img.alt = guess.guess;
-                caption.textContent = guess.guess;
-                caption.classList.add('caption');
+            img.src = `http://localhost:8080${guess.imagepath}`;
+            img.alt = guess.guess;
+            caption.textContent = guess.guess;
+            caption.classList.add("caption");
 
-                imgContainer.classList.add('imageContainer'); // Add class for styling
-                imgContainer.appendChild(img);
-                imgContainer.appendChild(caption);
-                imageGallery.appendChild(imgContainer);
-            });
+            imgContainer.classList.add("imageContainer");
+            imgContainer.appendChild(img);
+            imgContainer.appendChild(caption);
+            imageGallery.appendChild(imgContainer);
+          });
         })
-        .catch(error => console.error('Erreur:', error));
-</script>
-<script>
-    fetch('header.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('header').innerHTML = data;
+        .catch((error) => console.error("Erreur:", error));
+    </script>
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
         });
-</script>
-</body>
+    </script>
+  </body>
 </html>
