@@ -122,3 +122,7 @@ body {
   .btn-primary {
     margin-bottom: 8vw;
   }
+
+  #resultImage {
+    max-width: 50%;
+  }

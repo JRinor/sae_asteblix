@@ -240,6 +240,7 @@
           button.textContent = "Lancer le scan";
           button.classList.add("btn", "btn-primary", "mt-3", "row");
           button.onclick = function () {
+            localStorage.setItem("guessimage", img.src);
             scanImage(file); // Call scanImage with the file
           };
 
@@ -325,6 +326,7 @@
               guess: data.guess,
               guessId: data.id, // Assuming the API returns an ID
             });
+            
             window.location.href = `resultat.html?${params.toString()}`;
           })
           .catch((error) => {
