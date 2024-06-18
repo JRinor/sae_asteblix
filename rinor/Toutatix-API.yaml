@@ -1,0 +1,415 @@
+openapi: 3.0.1
+info:
+  description: "Asterix VS Obelix - Machine Learning API"
+  version: "1.0.0"
+  title: "Toutatix - Machine Learning API"
+  contact:
+    email: "emilien.micard@univ-lorraine.fr"
+  
+tags:
+- name: "login"
+  description: "Log In"
+- name: "guesses-public"
+  description: "Post or Put Guesses (public API)"
+- name: "guesses-protected"
+  description: "Access to ML Guesses History (protected API)"
+
+paths:
+  /login:
+    post:
+      tags:
+      - "login"
+      summary: "LogIn method to retrieve Token"
+      description: ""
+      operationId: "login"
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - email
+                - pass
+              properties:
+                email:
+                  type: string
+                  description: User's email
+                pass:
+                  type: string
+                  description: User's password
+        required: true
+      
+      responses:
+        "201":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthAccepted"
+        "401":
+          description: "Bad Authentication"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthRefused"
+
+  /guesses:
+    get:
+      tags:
+      - "guesses-protected"
+      summary: "Get All Guesses History"
+      description: "Get All Guesses History"
+      operationId: "getGuesses"
+      parameters:
+        - name: Authorization
+          in: header
+          description: Access Token (Bearer)
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb29kR29vZC5pdXRzZCIsImF1ZCI6IkZvb2RHb29kLml1dHNkIiwiaWF0IjoxNjM0Mjk0ODUwLCJleHAiOjE2MzQyOTg0NTAsImRhdGEiOnsiZmlyc3RfbmFtZSI6Ik1haXRyZSIsImxhc3RfbmFtZSI6IllvZGEiLCJhZG1pbiI6dHJ1ZX19.IM4VVVtHLGEZCSYby2JyvY5TmYn1FvMPedq24mEe_q4
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Guess"
+        "401":
+          description: "Bad Authentication"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthError"
+        
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+      - "guesses-protected"
+      summary: "Clean / Delete All Guesses from History (admin user only)"
+      description: "Clean / Delete All Guesses from History (admin user only)"
+      operationId: "deleteAllGuesses"
+      parameters:
+        - name: Authorization
+          in: header
+          description: Access Token (Bearer)
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb29kR29vZC5pdXRzZCIsImF1ZCI6IkZvb2RHb29kLml1dHNkIiwiaWF0IjoxNjM0Mjk0ODUwLCJleHAiOjE2MzQyOTg0NTAsImRhdGEiOnsiZmlyc3RfbmFtZSI6Ik1haXRyZSIsImxhc3RfbmFtZSI6IllvZGEiLCJhZG1pbiI6dHJ1ZX19.IM4VVVtHLGEZCSYby2JyvY5TmYn1FvMPedq24mEe_q4
+      responses:
+        "200":
+          description: "successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GuessesClean"
+        "401":
+          description: "Bad Authentication"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthError"
+        "403":
+          description: "Access Denied"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessDenied"
+      security:
+        - bearerAuth: []
+    
+    post:
+      tags:
+      - "guesses-public"
+      summary: "Try a new Guess and Post new Image"
+      description: "Try a new Guess and Post new Image"
+      operationId: "doGuess"
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                guessimage:
+                  type: string
+                  description: The file image
+                  format: binary
+        required: true
+
+      responses:
+        "201":
+          description: "AI try to guess and return guess object"
+          content:
+            application/json:
+              schema:            
+                $ref: "#/components/schemas/NewGuess"
+        "400":
+          description: "Bad Request : Missing 'guessimage' formdata field"
+          content:
+            application/json:
+              schema:     
+                $ref: "#/components/schemas/BadRequestMissingImageField"
+        "415":
+          description: "Unsupported Media Type : Missing 'guessimage' formdata field"
+          content:
+            application/json:
+              schema:     
+                $ref: "#/components/schemas/BadRequestWrongImageFormat"
+    
+  /guesses/{guessID}:  
+    put:
+      tags:
+      - "guesses-public"
+      summary: "Give feedback to AI from its Guess"
+      description: "Give feedback to AI from its Guess"
+      operationId: "feedbackGuess"
+      parameters:
+        - name: "guessID"
+          in: "path"
+          description: "ID of guess to feedback"
+          required: true
+          schema:
+            type: "integer"
+            
+      requestBody:
+        description: answer feedback
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - win
+              properties:
+                win:
+                  type: integer
+                  description: "AI feedback from user : [1 = AI won - it guessed well / 0 = Stalemate - This is not an Asterix or Obelix image / -1 : AI loose - it guessed wrong]"
+        required: true
+        
+      responses:
+        "200":
+          description: "Get Stastitics from AI"
+          content:
+            application/json:
+              schema:    
+                $ref: "#/components/schemas/GuessesResult"   
+        "400":
+          description: "Bad Request : Missing 'win' feedback json field"
+          content:
+            application/json:
+              schema:   
+                $ref: "#/components/schemas/BadRequestMissingWinField"
+        "404":
+          description: "Not Found"
+          content:
+            application/json:
+              schema:   
+                $ref: "#/components/schemas/NotFound"
+      
+  /guesses/images:
+    get:
+      tags:
+      - "guesses-protected"
+      summary: "Get All Guesse's Images Archive"
+      description: "Get All Guesse's Images Archive"
+      operationId: "getGuessesImages"
+      parameters:
+        - name: Authorization
+          in: header
+          description: Access Token (Bearer)
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJGb29kR29vZC5pdXRzZCIsImF1ZCI6IkZvb2RHb29kLml1dHNkIiwiaWF0IjoxNjM0Mjk0ODUwLCJleHAiOjE2MzQyOTg0NTAsImRhdGEiOnsiZmlyc3RfbmFtZSI6Ik1haXRyZSIsImxhc3RfbmFtZSI6IllvZGEiLCJhZG1pbiI6dHJ1ZX19.IM4VVVtHLGEZCSYby2JyvY5TmYn1FvMPedq24mEe_q4
+      responses:
+        "200":
+          description: "Archive ZIP"
+          content:
+            application/zip:
+              schema:
+                type: object
+                format: binary
+        "401":
+          description: "Bad Authentication"
+          content:
+            application/json:
+              schema:   
+                $ref: "#/components/schemas/AuthError"
+       
+      security:
+        - bearerAuth: []
+
+
+  
+     
+
+components:
+  schemas:
+    AuthRefused:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: false
+        message:
+          type: "string"
+          example: "Authentication failed. User not found. | Authentication failed. Wrong . | No Permission"
+          
+    AuthAccepted:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: true
+        message:
+          type: "string"
+          example: "Enjoy your token!"
+        token:
+          type: "string"
+          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6dHJ1ZSwic2VsZWN0ZWQiOnt9LCJnZXR0ZXJzIjp7fSwiX2lkIjoiNjExNjMwYjVhZTY0OTAwMDFlMGEzNWFiIiwid2FzUG9wdWxhdGVkIjpmYWxzZSwiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsiX2lkIjoiaW5pdCIsIm5hbWUiOiJpbml0IiwicGFzc3dvcmQiOiJpbml0IiwiYWRtaW4iOiJpbml0IiwiX192IjoiaW5pdCJ9LCJzdGF0ZXMiOnsiaWdub3JlIjp7fSwiZGVmYXVsdCI6e30sImluaXQiOnsiX2lkIjp0cnVlLCJuYW1lIjp0cnVlLCJwYXNzd29yZCI6dHJ1ZSwiYWRtaW4iOnRydWUsIl9fdiI6dHJ1ZX0sIm1vZGlmeSI6e30sInJlcXVpcmUiOnt9fSwic3RhdGVOYW1lcyI6WyJyZXF1aXJlIiwibW9kaWZ5IiwiaW5pdCIsImRlZmF1bHQiLCJpZ25vcmUiXX0sInBhdGhzVG9TY29wZXMiOnt9LCJjYWNoZWRSZXF1aXJlZCI6e30sInNlc3Npb24iOm51bGwsIiRzZXRDYWxsZWQiOnt9LCJlbWl0dGVyIjp7Il9ldmVudHMiOnt9LCJfZXZlbnRzQ291bnQiOjAsIl9tYXhMaXN0ZW5lcnMiOjB9LCIkb3B0aW9ucyI6eyJza2lwSWQiOnRydWUsImlzTmV3IjpmYWxzZSwid2lsbEluaXQiOnRydWUsImRlZmF1bHRzIjp0cnVlfX0sImlzTmV3IjpmYWxzZSwiJGxvY2FscyI6e30sIiRvcCI6bnVsbCwiX2RvYyI6eyJfaWQiOiI2MTE2MzBiNWFlNjQ5MDAwMWUwYTM1YWIiLCJuYW1lIjoiSm9obi5Eb2UiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOmZhbHNlLCJfX3YiOjB9LCIkaW5pdCI6dHJ1ZSwiaWF0IjoxNjMxMjcyNTY0LCJleHAiOjE2MzEzNTg5NjR9.yjaq-1Jm29I5saf7lIivntZ7ZTbTxYnx95xS8-pOZ58"
+          
+    
+    AuthError:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: false
+        message:
+          type: "string"
+          example: "Authentication Issue : Failed to authenticate token or no token provided"
+  
+    
+    AccessDenied:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: false
+        message:
+          type: "string"
+          example: "Access Denied : Not Allowed Operation with user's privilege"
+          
+    BadRequestMissingImageField:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: false
+        message:
+          type: "string"
+          example: "Bad Request : Missing 'guessimage' formdata field  "     
+          
+    BadRequestWrongImageFormat:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: false
+        message:
+          type: "string"
+          example: "Unsupported Media Type : Image must be 'jpg / jpeg / png'"   
+          
+          
+    
+    BadRequestMissingWinField:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: false
+        message:
+          type: "string"
+          example: "Bad Request : Missing 'win' json field  "     
+    
+    NotFound:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: false
+        message:
+          type: "string"
+          example: "Resource not found"
+      
+    Guess:
+      type: "object"
+      properties:
+        id: 
+          type: "integer"
+          description: "id"
+        date: 
+          type: "string"
+          description: "guess creation datetime"
+          example: "2023-04-04T16:17:54.736Z"
+        imagepath: 
+          type: "string"
+          description: "server relative posted image path for this guess"
+          example: "images/1680625074732.jpg"
+        guess: 
+          type: "string"
+          enum: ["asterix", "obelix"]
+          description: "answer from the AI model (le DevInA)"
+          example: "asterix"
+        win:       
+          type: "integer"
+          enum: [1, 0, -1]
+          description: "AI feedback from user : [1 = AI won - it guessed well / 0 = Stalemate - This is not an Asterix or Obelix image / -1 : AI loose - it guessed wrong]"
+          example: "1"
+        
+    NewGuess:
+      type: "object"
+      properties:
+        id: 
+          type: "integer"
+          description: "id"
+        date: 
+          type: "string"
+          description: "guess creation datetime"
+          example: "2023-04-04T16:17:54.736Z"
+        imagepath: 
+          type: "string"
+          description: "server relative posted image path for this guess"
+          example: "images/1680625074732.jpg"
+        guess: 
+          type: "string"
+          enum: ["asterix", "obelix"]
+          description: "answer from the AI model (le DevInA)"
+          example: "asterix"
+  
+    GuessesResult:
+      type: "object"
+      properties:
+        total: 
+          type: "integer"
+          description: "Total number of guesses done by AI"
+          example: 42
+        win: 
+          type: "integer"
+          description: "Total number of win guesses by AI"
+          example: 42
+        
+    
+  
+    GuessesClean:
+      type: "object"
+      properties:
+        success:
+          type: "boolean"
+          example: true
+        message:
+          type: "string"
+          example: "All Guesses deleted"
+          
+          
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+        
+   

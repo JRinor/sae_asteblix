@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Common Styles */
+header {
+    background-color: #173753;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+header .logo img,
+header .user-icon img {
+    height: 40px;
+    cursor: pointer;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* Desktop Header */
+.desktop-header {
+    display: flex;
+}
+
+.mobile-header {
+    display: none;
+}
+
+/* Mobile Header */
+.navbar {
+    background-color: #173753;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.fas {
+    color: white;
+}
+
+/* Media Queries */
+@media (max-width: 992px) {
+    .desktop-header {
+        display: none;
+    }
+
+    .mobile-header {
+        display: block;
+    }
+}

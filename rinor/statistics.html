@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques</title>
+    <link rel="stylesheet" href="statistics.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rounded+Mplus+1c:wght@400&display=swap" rel="stylesheet">
+</head>
+<body class="statistics">
+    <div id="header-container"></div>
+    <div class="content">
+        <div class="title">
+            <h1>Statistiques</h1>
+        </div>
+        <div id="chartContainer">
+            <canvas id="myChart"></canvas>
+        </div>
+        <p>Nombre de scans effectués : <span id="scanCount"></span></p>
+        <div class="legend">
+            <h2>Légende :</h2>
+            <ul id="legendList">
+                <li>
+                    <span class="legend-color" style="background-color: green"></span>
+                    Vrai: <span id="trueCount"></span>
+                </li>
+                <li>
+                    <span class="legend-color" style="background-color: red"></span>
+                    Faux: <span id="falseCount"></span>
+                </li>
+                <li>
+                    <span class="legend-color" style="background-color: gray"></span>
+                    Invalid: <span id="invalidCount"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="loadHeader.js"></script>
+    <script>
+        const token = localStorage.getItem('authToken');
+
+        let myChart;
+
+        function drawChart(trueCount, falseCount, invalidCount) {
+            const ctx = document.getElementById("myChart").getContext("2d");
+            if (myChart) {
+                myChart.destroy();
+            }
+            myChart = new Chart(ctx, {
+                type: "pie",
+                data: {
+                    datasets: [
+                        {
+                            data: [trueCount, falseCount, invalidCount],
+                            backgroundColor: ["green", "red", "gray"],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: "Pourcentage de réponses vraies, fausses et invalides",
+                    },
+                },
+            });
+        }
+
+        fetch("http://localhost:8080/api/guesses", {
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (!Array.isArray(data)) {
+                    console.error("Les données reçues ne sont pas un tableau:", data);
+                    return;
+                }
+
+                let trueCount = 0;
+                let falseCount = 0;
+                let invalidCount = 0;
+
+                data.forEach((guess) => {
+                    if (guess.win === "1") {
+                        trueCount++;
+                    } else if (guess.win === "-1") {
+                        falseCount++;
+                    } else if (guess.win === "0") {
+                        invalidCount++;
+                    }
+                });
+
+                const totalScans = trueCount + falseCount + invalidCount;
+
+                document.getElementById("trueCount").textContent = trueCount;
+                document.getElementById("falseCount").textContent = falseCount;
+                document.getElementById("invalidCount").textContent = invalidCount;
+                document.getElementById("scanCount").textContent = totalScans;
+
+                drawChart(trueCount, falseCount, invalidCount);
+            })
+            .catch((error) => console.error("Error:", error));
+
+        window.addEventListener("resize", () => {
+            const trueCount = parseInt(
+                document.getElementById("trueCount").textContent
+            );
+            const falseCount = parseInt(
+                document.getElementById("falseCount").textContent
+            );
+            const invalidCount = parseInt(
+                document.getElementById("invalidCount").textContent
+            );
+            drawChart(trueCount, falseCount, invalidCount);
+        });
+    </script>
+    <script src="loadHeader.js"></script>
+</body>
+</html>

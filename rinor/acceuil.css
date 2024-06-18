@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fffbcc;
+}
+
+main {
+    padding: 20px;
+    background-color: #fffbcc;
+}
+
+.presentation {
+    text-align: center;
+}
+
+.presentation h1 {
+    font-size: 24px;
+    color: #003366;
+}
+
+.presentation p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.image-container img {
+    width: 300px;
+    margin: 20px 0;
+}
+
+.scan-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #003366;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.scan-link:hover {
+    background-color: #002244;
+}

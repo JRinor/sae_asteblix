@@ -1,0 +1,76 @@
+/* Styles spécifiques à la page scan */
+body.scan-page {
+    background-color: #fffdd9;
+    font-family: "Rounded Mplus 1c", sans-serif;
+    margin: 0;
+}
+
+.scan-page .container {
+    text-align: center;
+    width: 100%;
+    margin-top: 5vh;
+}
+
+.scan-page .container h2 {
+    font-weight: bold;
+    color: #173753;
+    font-size: 6vh;
+    margin-bottom: 3vw;
+    margin-top: 10vw;
+}
+
+.scan-page .container p {
+    color: #173753;
+    font-size: 3vh;
+    margin-bottom: 3vw;
+}
+
+.scan-page #prendre-photo, .scan-page #depose-photo {
+    margin-bottom: 3vw;
+}
+
+.scan-page #prendre-photo img, .scan-page #depose-photo img {
+    cursor: pointer;
+}
+
+.scan-page #cameraModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.scan-page .modal-content {
+    background-color: #fffdd9;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.scan-page .dlgheadcontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.scan-page .close {
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.scan-page .dlgcontainer {
+    text-align: center;
+}
