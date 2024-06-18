@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const script = document.createElement("script");
                 script.src = "modal.js";
                 script.onload = function() {
-                    updateHeaderForLoginStatus(); // Met à jour l'affichage en fonction de l'état de connexion
+                    updateHeaderForLoginStatus();
                 };
                 document.body.appendChild(script);
             })
@@ -23,20 +23,19 @@ document.addEventListener("DOMContentLoaded", function() {
 function updateHeaderForLoginStatus() {
     const token = localStorage.getItem('authToken');
     const logoutButton = document.getElementById("logout-button");
-    const mobileLogoutButton = document.getElementById("mobile-logout-button"); // Get the mobile logout button
+    const mobileLogoutButton = document.getElementById("mobile-logout-button");
     const userIcon = document.getElementById("user-icon");
-    const openModalButton = document.getElementById("open-modal"); // Get the mobile login button
+    const openModalButton = document.getElementById("open-modal");
     const galerieLink = document.getElementById("galerie-link");
-    const mobileGalerieLink = document.querySelector(".mobile-header .nav-link[href='galerie.html']"); // Get the mobile galerie link
+    const mobileGalerieLink = document.querySelector(".mobile-header .nav-link[href='galerie.html']");
 
     if (token) {
         logoutButton.style.display = "block";
-        mobileLogoutButton.style.display = "block"; // Show the mobile logout button
+        mobileLogoutButton.style.display = "block";
         userIcon.style.display = "none";
-        openModalButton.style.display = "none"; // Hide the mobile login button
-        if (mobileGalerieLink) mobileGalerieLink.style.display = "block"; // Show the mobile galerie link
+        openModalButton.style.display = "none";
+        if (mobileGalerieLink) mobileGalerieLink.style.display = "block";
 
-        // Si l'utilisateur est connecté et le lien vers la galerie n'existe pas encore, on l'ajoute
         if (!galerieLink) {
             const navLinks = document.getElementById("nav-links");
             const galerieTab = document.createElement("li");
@@ -46,12 +45,11 @@ function updateHeaderForLoginStatus() {
         }
     } else {
         logoutButton.style.display = "none";
-        mobileLogoutButton.style.display = "none"; // Hide the mobile logout button
+        mobileLogoutButton.style.display = "none";
         userIcon.style.display = "block";
-        openModalButton.style.display = "block"; // Show the mobile login button
-        if (mobileGalerieLink) mobileGalerieLink.style.display = "none"; // Hide the mobile galerie link
+        openModalButton.style.display = "block";
+        if (mobileGalerieLink) mobileGalerieLink.style.display = "none";
 
-        // Si l'utilisateur n'est pas connecté et le lien vers la galerie existe, on le supprime
         if (galerieLink) {
             galerieLink.remove();
         }
@@ -61,10 +59,5 @@ function updateHeaderForLoginStatus() {
         localStorage.removeItem('authToken');
         window.location.href = 'acceuil.html';
     });
-
-    // Add event listener for the mobile logout button
-    mobileLogoutButton.addEventListener("click", function() {
-        localStorage.removeItem('authToken');
-        window.location.href = 'acceuil.html';
-    });
+    
 }
