@@ -23,11 +23,18 @@ function sendFeedback(isWin) {
     console.log("Guess ID:", guessId);
     console.log("Win Value:", winValue);
 
+    const token = localStorage.getItem('authToken');
+    const headers = {
+        "Content-Type": "application/json"
+    };
+
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+
     fetch(`http://localhost:8080/api/guesses/${guessId}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: headers,
         body: body,
     })
     .then((response) => {

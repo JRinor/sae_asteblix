@@ -7,7 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function loadImages() {
-        fetch('http://localhost:8080/api/guesses', {
+        const token = localStorage.getItem('authToken');
+        console.log('Token used:', token);
+
+        fetch(`http://localhost:8080/api/guesses?token=${token}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

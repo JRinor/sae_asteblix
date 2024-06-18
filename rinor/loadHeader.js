@@ -23,12 +23,18 @@ document.addEventListener("DOMContentLoaded", function() {
 function updateHeaderForLoginStatus() {
     const token = localStorage.getItem('authToken');
     const logoutButton = document.getElementById("logout-button");
+    const mobileLogoutButton = document.getElementById("mobile-logout-button"); // Get the mobile logout button
     const userIcon = document.getElementById("user-icon");
+    const openModalButton = document.getElementById("open-modal"); // Get the mobile login button
     const galerieLink = document.getElementById("galerie-link");
+    const mobileGalerieLink = document.querySelector(".mobile-header .nav-link[href='galerie.html']"); // Get the mobile galerie link
 
     if (token) {
         logoutButton.style.display = "block";
+        mobileLogoutButton.style.display = "block"; // Show the mobile logout button
         userIcon.style.display = "none";
+        openModalButton.style.display = "none"; // Hide the mobile login button
+        if (mobileGalerieLink) mobileGalerieLink.style.display = "block"; // Show the mobile galerie link
 
         // Si l'utilisateur est connecté et le lien vers la galerie n'existe pas encore, on l'ajoute
         if (!galerieLink) {
@@ -40,7 +46,10 @@ function updateHeaderForLoginStatus() {
         }
     } else {
         logoutButton.style.display = "none";
+        mobileLogoutButton.style.display = "none"; // Hide the mobile logout button
         userIcon.style.display = "block";
+        openModalButton.style.display = "block"; // Show the mobile login button
+        if (mobileGalerieLink) mobileGalerieLink.style.display = "none"; // Hide the mobile galerie link
 
         // Si l'utilisateur n'est pas connecté et le lien vers la galerie existe, on le supprime
         if (galerieLink) {
@@ -49,6 +58,12 @@ function updateHeaderForLoginStatus() {
     }
 
     logoutButton.addEventListener("click", function() {
+        localStorage.removeItem('authToken');
+        window.location.href = 'acceuil.html';
+    });
+
+    // Add event listener for the mobile logout button
+    mobileLogoutButton.addEventListener("click", function() {
         localStorage.removeItem('authToken');
         window.location.href = 'acceuil.html';
     });
