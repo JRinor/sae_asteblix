@@ -59,5 +59,5 @@ function updateHeaderForLoginStatus() {
         localStorage.removeItem('authToken');
         window.location.href = 'acceuil.html';
     });
-    
+
 }

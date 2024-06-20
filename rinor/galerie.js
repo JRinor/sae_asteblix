@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const token = localStorage.getItem('authToken');
         console.log('Token used:', token);
 
-        fetch(`http://localhost:8080/api/guesses?token=${token}`, {
+        fetch(`http://localhost:8080/api/guesses?token`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
